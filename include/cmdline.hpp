@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <map>
+#include <functional>
 
 #ifndef _PASL_UTIL_CMDLINE_H_
 #define _PASL_UTIL_CMDLINE_H_
