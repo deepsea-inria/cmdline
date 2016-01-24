@@ -11,7 +11,7 @@ string data that is read from the comand line.
 The documentation is most easily read in html or pdf format. To render
 in these formats, you will need the [pandoc](http://pandoc.org/)
 tool. When you have pandoc installed, you can render html and pdf
-versions simply by running `make` from the `doc` folder.
+versions simply by running `make README.html5` or `make README.pdf`.
 
 Command-line conventions {#conventions}
 ========================
