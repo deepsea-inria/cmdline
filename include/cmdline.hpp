@@ -14,6 +14,7 @@ namespace util {
 namespace cmdline {
   
 namespace {
+  
   int global_argc = -1;
   char** global_argv;
   
@@ -123,180 +124,251 @@ void set(int argc, char** argv) {
 }
   
 /*---------------------------------------------------------------------*/
-/* Specific parsing functions */
-
-bool parse_bool(std::string name) {
-  bool r;
-  check (name, parse(BOOL, name, &r));
-  return r;
-}
-
-int parse_int(std::string name) {
-  int r;
-  check (name, parse(INT, name, &r));
-  return r;
-}
-
-long parse_long(std::string name) {
-  long r;
-  check (name, parse(LONG, name, &r));
-  return r;
-}
-
-float parse_float(std::string name) {
-  float r;
-  check(name, parse(FLOAT, name, &r));
-  return r;
-}
-
-double parse_double(std::string name) {
-  double r;
-  check(name, parse(DOUBLE, name, &r));
-  return r;
-}
-
-std::string parse_string(std::string name) {
-  std::string r;
-  check(name, parse(STRING, name, &r));
-  return r;
-}
-  
-/*---------------------------------------------------------------------*/
-/* Specific parsing functions with default values */
-
-bool parse_or_default_bool(std::string name, bool d,
-                           bool expected=true) {
-  bool r;
-  if (parse(BOOL, name, &r)) {
-    return r;
-  } else {
-    print_default(name, d, expected);
-    return d;
-  }
-}
-
-int parse_or_default_int(std::string name, int d,
-                         bool expected=true) {
-  int r;
-  if (parse(INT, name, &r)) {
-    return r;
-  } else {
-    print_default(name, d, expected);
-    return d;
-  }
-}
-
-long parse_or_default_long(std::string name, long d,
-                           bool expected=true) {
-  long r;
-  if (parse(LONG, name, &r)) {
-    return r;
-  } else {
-    print_default(name, d, expected);
-    return d;
-  }
-}
-
-float parse_or_default_float(std::string name, float f,
-                             bool expected=true) {
-  float r;
-  if (parse(FLOAT, name, &r)) {
-    return r;
-  } else {
-    print_default(name, f, expected);
-    return f;
-  }
-}
-
-double parse_or_default_double(std::string name, double d,
-                               bool expected=true) {
-  double r;
-  if (parse(DOUBLE, name, &r)) {
-    return r;
-  } else {
-    print_default(name, d, expected);
-    return d;
-  }
-}
-
-std::string parse_or_default_string(std::string name, std::string d,
-                                    bool expected=true) {
-  std::string r;
-  if (parse(STRING, name, &r)) {
-    return r;
-  } else {
-    print_default(name, d, expected);
-    return d;
-  }
-}
-  
-/*---------------------------------------------------------------------*/
-/* Map */
+/* Parsing functions */
   
 template <class Item>
-class map {
+Item parse(std::string key) {
+  Item x;
+  std::cerr << "Error: item type is not supported" << std::endl;
+  exit(0);
+  return x;
+}
+  
+template <>
+bool parse<bool>(std::string key) {
+  bool r;
+  check(key, parse(BOOL, key, &r));
+  return r;
+}
+  
+template <>
+int parse<int>(std::string key) {
+  int r;
+  check(key, parse(INT, key, &r));
+  return r;
+}
+  
+template <>
+long parse<long>(std::string key) {
+  long r;
+  check(key, parse(LONG, key, &r));
+  return r;
+}
+
+template <>
+float parse<float>(std::string key) {
+  float r;
+  check(key, parse(FLOAT, key, &r));
+  return r;
+}
+
+template <>
+double parse<double>(std::string key) {
+  double r;
+  check(key, parse(DOUBLE, key, &r));
+  return r;
+}
+
+template <>
+std::string parse<std::string>(std::string key) {
+  std::string r;
+  check(key, parse(STRING, key, &r));
+  return r;
+}
+  
+template <class Item>
+Item parse_or_default(std::string key, Item d,
+                      bool expected=true) {
+  Item x;
+  std::cerr << "Error: item type is not supported" << std::endl;
+  exit(0);
+  return x;
+}
+
+template <>
+bool parse_or_default(std::string key, bool d,
+                      bool expected) {
+  bool r;
+  if (parse(BOOL, key, &r)) {
+    return r;
+  } else {
+    print_default(key, d, expected);
+    return d;
+  }
+}
+
+template <>
+int parse_or_default(std::string key, int d,
+                      bool expected) {
+  int r;
+  if (parse(INT, key, &r)) {
+    return r;
+  } else {
+    print_default(key, d, expected);
+    return d;
+  }
+}
+  
+template <>
+long parse_or_default(std::string key, long d,
+                      bool expected) {
+  long r;
+  if (parse(LONG, key, &r)) {
+    return r;
+  } else {
+    print_default(key, d, expected);
+    return d;
+  }
+}
+
+template <>
+float parse_or_default(std::string key, float d,
+                       bool expected) {
+  float r;
+  if (parse(FLOAT, key, &r)) {
+    return r;
+  } else {
+    print_default(key, d, expected);
+    return d;
+  }
+}
+
+template <>
+double parse_or_default(std::string key, double d,
+                        bool expected) {
+  double r;
+  if (parse(DOUBLE, key, &r)) {
+    return r;
+  } else {
+    print_default(key, d, expected);
+    return d;
+  }
+}
+
+template <>
+std::string parse_or_default(std::string key, std::string d,
+                             bool expected) {
+  std::string r;
+  if (parse(STRING, key, &r)) {
+    return r;
+  } else {
+    print_default(key, d, expected);
+    return d;
+  }
+}
+  
+/*---------------------------------------------------------------------*/
+/* For backwards compatibility */
+
+bool parse_bool(std::string key) {
+  return parse<bool>(key);
+}
+
+int parse_int(std::string key) {
+  return parse<bool>(key);
+}
+
+long parse_long(std::string key) {
+  return parse<long>(key);
+}
+
+float parse_float(std::string key) {
+  return parse<float>(key);
+}
+
+double parse_double(std::string key) {
+  return parse<double>(key);
+}
+
+std::string parse_string(std::string key) {
+  return parse<std::string>(key);
+}
+  
+bool parse_or_default_bool(std::string key, bool d,
+                           bool expected=true) {
+  return parse_or_default(key, d, expected);
+}
+
+int parse_or_default_int(std::string key, int d,
+                         bool expected=true) {
+  return parse_or_default(key, d, expected);
+}
+
+long parse_or_default_long(std::string key, long d,
+                           bool expected=true) {
+  return parse_or_default(key, d, expected);
+}
+
+float parse_or_default_float(std::string key, float d,
+                             bool expected=true) {
+  return parse_or_default(key, d, expected);
+}
+
+double parse_or_default_double(std::string key, double d,
+                               bool expected=true) {
+  return parse_or_default(key, d, expected);
+}
+
+std::string parse_or_default_string(std::string key, std::string d,
+                                    bool expected=true) {
+  return parse_or_default(key, d, expected);
+}
+  
+/*---------------------------------------------------------------------*/
+/* Dispatcher */
+  
+class dispatcher {
+public:
+  
+  using thunk_type = std::function<void()>;
+  
 private:
   
-  std::map<std::string, Item> m;
+  std::map<std::string, thunk_type> table;
   
-  void failwith(std::string parameter, std::string key) {
-    std::cout << "Not found: -" << parameter << " " << key << std::endl;
+  void failwith(std::string key, std::string label) {
+    std::cout << "Not found: -" << key << " " << label << std::endl;
     std::cout << "Valid arguments are: ";
-    for (auto it = m.begin(); it != m.end(); it++)
+    for (auto it = table.begin(); it != table.end(); it++) {
       std::cout << it->first << " ";
+    }
     std::cout << std::endl;
     exit(1);
   }
   
 public:
   
-  void insert(std::string key, Item value) {
-    m.insert(std::make_pair(key, value));
+  void add(std::string label, thunk_type f) {
+    table.insert(std::make_pair(label, f));
   }
   
-  Item& find(std::string key, std::string parameter) {
-    auto it = m.find(key);
-    if (it == m.end()) {
-      failwith(parameter, key);
+  void dispatch(std::string key) {
+    std::string label = parse_or_default<std::string>(key, "");
+    auto it = table.find(label);
+    if (it == table.end()) {
+      failwith(key, label);
     }
-    return (*it).second;
+    thunk_type& f = (*it).second;
+    f();
   }
   
-  Item& find_by_parameter(std::string parameter) {
-    return find(parse_or_default_string(parameter, ""), parameter);
-  }
-  
-  Item find_by_parameter_or_default(std::string parameter, const Item& dflt) {
-    std::string key = parse_or_default_string(parameter, "");
-    auto it = m.find(key);
-    if (it == m.end())
-      return Item(dflt);
-    return (*it).second;
-  }
-  
-  Item find_by_parameter_or_default_key(std::string parameter, std::string dflt) {
-    std::string key = parse_or_default_string(parameter, dflt);
-    return find(parameter, key);
-  }
-  
-  template <class Body>
-  void for_each_key(const Body& f) const {
-    for (auto it = m.begin(); it != m.end(); it++) {
-      f(it->first, it->second);
+  void dispatch_or_default(std::string key, std::string d) {
+    std::string label = parse_or_default<std::string>(key, "");
+    auto it = table.find(label);
+    if (it == table.end()) {
+      auto it2 = table.find(d);
+      if (it2 == table.end()) {
+        failwith(key, d);
+      }
+      thunk_type& f = (*it2).second;
+      f();
+    } else {
+      thunk_type& f = (*it).second;
+      f();
     }
   }
   
 };
-  
-using dispatcher = map<std::function<void()>>;
-  
-void dispatch(dispatcher& d, std::string parameter) {
-  d.find_by_parameter(parameter)();
-}
-
-void dispatch(dispatcher& d, std::string parameter, std::string dflt_key) {
-  d.find_by_parameter_or_default_key(parameter, dflt_key)();
-}
   
 } // end namespace
 } // end namespace
