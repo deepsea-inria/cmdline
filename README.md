@@ -8,6 +8,11 @@ Introduction
 This library provides a collection of basic utilities for parsing
 string data that is read from the comand line.
 
+The documentation is most easily read in html or pdf format. To render
+in these formats, you will need the [pandoc](http://pandoc.org/)
+tool. When you have pandoc installed, you can render html and pdf
+versions simply by running `make` from the `doc` folder.
+
 Command-line conventions {#conventions}
 ========================
 
