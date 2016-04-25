@@ -7,11 +7,10 @@
 #include <map>
 #include <functional>
 
-#ifndef _PASL_UTIL_CMDLINE_H_
-#define _PASL_UTIL_CMDLINE_H_
+#ifndef _DEEPSEA_UTIL_CMDLINE_H_
+#define _DEEPSEA_UTIL_CMDLINE_H_
 
-namespace pasl {
-namespace util {
+namespace deepsea {
 namespace cmdline {
   
 namespace {
@@ -373,6 +372,5 @@ public:
   
 } // end namespace
 } // end namespace
-} // end namespace
 
-#endif /*! _PASL_UTIL_CMDLINE_H_ */
+#endif /*! _DEEPSEA_UTIL_CMDLINE_H_ */

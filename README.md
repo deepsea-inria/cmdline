@@ -1,4 +1,4 @@
-% The PASL command-line parser
+% The Deepsea command-line parser
 % Deepsea Project
 % 23 January 2016
 
@@ -55,13 +55,12 @@ called. Any call to other functions in the cmdline library that occur
 prior to correct initialization will fail, terminating the program.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.cpp}
-namespace pasl {
-namespace util {
+namespace deepsea {
 namespace cmdline {
 
 void set(int argc, char** argv);
 
-} } }
+} }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following code snippet shows a correct initialization of the
@@ -71,7 +70,7 @@ cmdline library.
 #include "cmdline.hpp"
 
 int main(int argc, char** argv) {
-  pasl::util::cmdline::set(argc, argv);
+  deepsea::cmdline::set(argc, argv);
   // can use cmdline here, post initialization
   return 0;
 }
@@ -121,9 +120,9 @@ Contents of the file `myparse.cpp`.
 #include <iostream>
 
 int main(int argc, char** argv) {
-  pasl::util::cmdline::set(argc, argv);
-  int x = pasl::util::cmdline::parse<int>("x");
-  int y = pasl::util::cmdline::parse_or_default("y", 123);
+  deepsea::cmdline::set(argc, argv);
+  int x = deepsea::cmdline::parse<int>("x");
+  int y = deepsea::cmdline::parse_or_default("y", 123);
   std::cout << "x = " << x << ", y = " << y << std::endl;
   return 0;
 }
@@ -144,13 +143,12 @@ Dispatcher
 ----------
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.cpp}
-namespace pasl {
-namespace util {
+namespace deepsea {
 namespace cmdline {
 
 class dispatcher;
 
-} } }
+} }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A disptacher is an object that stores a set of label/function pairs
@@ -214,8 +212,8 @@ Contents of the file `mydispatcher.cpp`:
 #include <iostream>
 
 int main(int argc, char** argv) {
-  pasl::util::cmdline::set(argc, argv);
-  pasl::util::cmdline::dispatcher d;
+  deepsea::cmdline::set(argc, argv);
+  deepsea::cmdline::dispatcher d;
   d.add("foo", [&] {
     std::cout << "Got foo" << std::endl;
   });
