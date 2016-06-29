@@ -122,6 +122,10 @@ void set(int argc, char** argv) {
   global_argc = argc;
   global_argv = argv;
 }
+
+std::string name_of_my_executable() {
+  return std::string(global_argv[0]);
+}
   
 /*---------------------------------------------------------------------*/
 /* Parsing functions */
