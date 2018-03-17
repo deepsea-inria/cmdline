@@ -1,10 +1,10 @@
-all: README.html5 README.pdf
+all: README.html README.pdf
 
 %.pdf : %.md
 	pandoc $< -s -o $@
 
-%.html5 : %.md
+%.html : %.md
 	pandoc $< -s --toc --number-sections -c cmdline.css -o $@
 
 clean:
-	rm -f README.pdf README.html5
+	rm -f README.pdf README.html
