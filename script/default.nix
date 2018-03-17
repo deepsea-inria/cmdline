@@ -6,7 +6,7 @@
 
 stdenv.mkDerivation rec {
   name = "cmdline-${version}";
-  version = "v1.1";
+  version = "v1.0";
 
   src = fetchurl {
     url = "https://github.com/deepsea-inria/cmdline/archive/${version}.tar.gz";
