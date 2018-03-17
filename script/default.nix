@@ -34,6 +34,7 @@ stdenv.mkDerivation rec {
 
   meta = {
     description = "A small, self-contained header file that implements the Deepsea command-line conventions.";
+    license = "MIT";
     homepage = http://deepsea.inria.fr/;
   };
 }
