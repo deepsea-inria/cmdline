@@ -10,7 +10,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://github.com/deepsea-inria/cmdline/archive/${version}.tar.gz";
-    sha256 = "d947aa8fec769e417684a924e3f5bf76beaacda9c51725d9f955047c98e4ab39";
+    sha256 = "1fji3xpadpa70sy7fqcsvc31n0wmkrhv3r0i2a1dgk2iq5mrin3v";
   };
 
   buildInputs = if buildDocs then [
