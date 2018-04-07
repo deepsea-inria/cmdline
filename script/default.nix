@@ -1,17 +1,13 @@
 { pkgs   ? import <nixpkgs> {},
   stdenv ? pkgs.stdenv,
-  fetchurl,
+  cmdlineSrc ? ../.,
   buildDocs ? false
 }:
 
 stdenv.mkDerivation rec {
-  name = "cmdline-${version}";
-  version = "v1.0";
+  name = "cmdline";
 
-  src = fetchurl {
-    url = "https://github.com/deepsea-inria/cmdline/archive/${version}.tar.gz";
-    sha256 = "1fji3xpadpa70sy7fqcsvc31n0wmkrhv3r0i2a1dgk2iq5mrin3v";
-  };
+  src = cmdlineSrc;
 
   buildInputs = if buildDocs then [
     pkgs.pandoc pkgs.texlive.combined.scheme-medium
