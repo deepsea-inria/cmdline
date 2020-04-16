@@ -1,3 +1,4 @@
+#pragma once
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -6,9 +7,6 @@
 #include <iostream>
 #include <map>
 #include <functional>
-
-#ifndef _DEEPSEA_UTIL_CMDLINE_H_
-#define _DEEPSEA_UTIL_CMDLINE_H_
 
 namespace deepsea {
 namespace cmdline {
@@ -123,10 +121,15 @@ void set(int argc, char** argv) {
   global_argv = argv;
 }
 
+__attribute__((constructor)) // GCC syntax that makes __initialize run before main()
+void __initialize(int argc, char **argv) {
+  set(argc, argv);
+}
+
 std::string name_of_my_executable() {
   return std::string(global_argv[0]);
 }
-  
+ 
 /*---------------------------------------------------------------------*/
 /* Parsing functions */
   
@@ -376,5 +379,3 @@ public:
   
 } // end namespace
 } // end namespace
-
-#endif /*! _DEEPSEA_UTIL_CMDLINE_H_ */
