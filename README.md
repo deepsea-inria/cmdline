@@ -220,7 +220,7 @@ int main(int argc, char** argv) {
   d.add("bar", [&] {
     std::cout << "Got bar" << std::endl;
   });
-  d.disptach_or_default("mykey", "foo");
+  d.dispatch_or_default("mykey", "foo");
   return 0;
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
